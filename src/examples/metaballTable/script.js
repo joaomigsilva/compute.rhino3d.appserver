@@ -35,13 +35,13 @@ rhino3dm().then(async m => {
 function rndPts() {
   // generate random points
 
-  const cntPts = 4
-  const cntPts2 = 4
+  const cntPts = 7
+  const cntPts2 = 7
   const bndX = dimension_slider.valueAsNumber * 15
   const bndY = dimension_slider.valueAsNumber * 15
 
-  const coordenadas = [{x:300,y:500},{x:900,y:1000},{x:1200,y:400},{x:1800,y:700}]
-  const coordenadas2 = [{x:700,y:200},{x:900,y:300},{x:800,y:100},{x:800,y:300}]
+  const coordenadas = [{x:-74,y:52},{x:154,y:133},{x:104,y:-193},{x:122,y:-20},{x:164,y:-118},{x:127,y:-148},{x:-25,y:-99}]
+  const coordenadas2 = [{x:-276,y:163},{x:-285,y:106},{x:-76,y:50},{x:-47,y:44},{x:-118,y:-204},{x:-20,y:-197},{x:-15,y:-64}]
 
   for (let i = 0; i < cntPts; i++) {
     const x = coordenadas[i].x
