@@ -87,7 +87,7 @@ function rndPts() {
     const icoGeo = new THREE.IcosahedronGeometry(25)
     const icoMat = new THREE.MeshNormalMaterial()
     const ico = new THREE.Mesh( icoGeo, icoMat )
-    ico.name = 'ico'
+    ico.name = 'ico2'
     ico.position.set( x, y, z)
     scene.add( ico )
     
@@ -107,10 +107,16 @@ function onChange() {
   if ( !dragging ) {
     // update points position
     points = []
+    points2 = []
     scene.traverse(child => {
       if ( child.name === 'ico' ) {
         const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
         points.push( pt )
+        console.log(pt)
+      }
+      if ( child.name === 'ico2' ) {
+        const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
+        points2.push( pt )
         console.log(pt)
       }
     }, false)
