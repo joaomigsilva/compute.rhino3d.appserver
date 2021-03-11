@@ -66,6 +66,8 @@ function rndPts() {
     let tcontrols = new TransformControls( camera, renderer.domElement )
     tcontrols.enabled = true
     tcontrols.attach( ico )
+    tcontrols.showX = false
+    tcontrols.showY = false
     tcontrols.showZ = false
     tcontrols.addEventListener( 'dragging-changed', onChange )
     scene.add(tcontrols)
@@ -94,6 +96,8 @@ function rndPts() {
     let tcontrols = new TransformControls( camera, renderer.domElement )
     tcontrols.enabled = true
     tcontrols.attach( ico )
+    tcontrols.showX = false
+    tcontrols.showY = false
     tcontrols.showZ = false
     tcontrols.addEventListener( 'dragging-changed', onChange )
     scene.add(tcontrols)
@@ -296,7 +300,7 @@ function init () {
   THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
   scene = new THREE.Scene()
-  scene.background = new THREE.Color(1,1,1)
+  scene.background = new THREE.Color(0,0,0)
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
   camera.position.x = 1000
   camera.position.y = 0
