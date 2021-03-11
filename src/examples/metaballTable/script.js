@@ -66,9 +66,10 @@ function rndPts() {
     let tcontrols = new TransformControls( camera, renderer.domElement )
     tcontrols.enabled = true
     tcontrols.attach( ico )
-    tcontrols.showX = false
-    tcontrols.showY = false
-    tcontrols.showZ = false
+    tcontrols.showX = true
+    tcontrols.showY = true
+    tcontrols.showZ = true
+    tcontrols.size = 0.1
     tcontrols.addEventListener( 'dragging-changed', onChange )
     scene.add(tcontrols)
     
@@ -96,9 +97,10 @@ function rndPts() {
     let tcontrols = new TransformControls( camera, renderer.domElement )
     tcontrols.enabled = true
     tcontrols.attach( ico )
-    tcontrols.showX = false
-    tcontrols.showY = false
-    tcontrols.showZ = false
+    tcontrols.showX = true
+    tcontrols.showY = true
+    tcontrols.showZ = true
+    tcontrols.size = 0.1
     tcontrols.addEventListener( 'dragging-changed', onChange )
     scene.add(tcontrols)
     
