@@ -41,7 +41,7 @@ function rndPts() {
   const bndY = dimension_slider.valueAsNumber * 15
 
   const coordenadas = [{x:300,y:500},{x:900,y:1000},{x:1200,y:400},{x:1800,y:700}]
-  const coordenadas2 = [{x:700,y:200},{x:900,y:5000},{x:800,y:100},{x:800,y:100}]
+  const coordenadas2 = [{x:700,y:200},{x:900,y:300},{x:800,y:100},{x:800,y:300}]
 
   for (let i = 0; i < cntPts; i++) {
     const x = coordenadas[i].x
