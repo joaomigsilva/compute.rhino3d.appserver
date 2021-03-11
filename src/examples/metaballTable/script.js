@@ -107,7 +107,6 @@ function onChange() {
   if ( !dragging ) {
     // update points position
     points = []
-    points2 = []
     scene.traverse(child => {
       if ( child.name === 'ico' ) {
         const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
@@ -139,7 +138,8 @@ async function compute () {
     inputs: {
       'dimension': dimension_slider.valueAsNumber,
       'height': height_slider.valueAsNumber,
-      'points': points
+      'points': points, points2
+    
     }
   }
 
