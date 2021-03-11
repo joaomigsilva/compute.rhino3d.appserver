@@ -56,8 +56,8 @@ function rndPts() {
     points.push(pt)
     
     //viz in three
-    const icoGeo = new THREE.IcosahedronGeometry(25)
-    const icoMat = new THREE.MeshNormalMaterial()
+    const icoGeo = new THREE.IcosahedronGeometry(5)
+    const icoMat = new THREE.MeshNormalMaterial(( { color: 0xff5733, vertexColors: true } ))
     const ico = new THREE.Mesh( icoGeo, icoMat )
     ico.name = 'ico'
     ico.position.set( x, y, z)
@@ -84,7 +84,7 @@ function rndPts() {
     points2.push(pt2)
     
     //viz in three
-    const icoGeo = new THREE.IcosahedronGeometry(25)
+    const icoGeo = new THREE.IcosahedronGeometry(5)
     const icoMat = new THREE.MeshNormalMaterial()
     const ico = new THREE.Mesh( icoGeo, icoMat )
     ico.name = 'ico2'
@@ -299,7 +299,7 @@ function init () {
   scene.background = new THREE.Color(1,1,1)
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 10000 )
   camera.position.x = 1000
-  camera.position.y = 1000
+  camera.position.y = 0
   camera.position.z = 1000
 
   renderer = new THREE.WebGLRenderer({antialias: true})
