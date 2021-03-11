@@ -35,7 +35,7 @@ rhino3dm().then(async m => {
 function rndPts() {
   // generate random points
 
-  const cntPts = 3
+  const cntPts = 4
   const bndX = dimension_slider.valueAsNumber * 100
   const bndY = dimension_slider.valueAsNumber * 100
 
