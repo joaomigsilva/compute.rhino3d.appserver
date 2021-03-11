@@ -20,7 +20,7 @@ height_slider.addEventListener( 'mouseup', onSliderChange, false )
 height_slider.addEventListener( 'touchend', onSliderChange, false )
 
 let points = []
-
+let points2 = []
 let rhino, doc
 
 rhino3dm().then(async m => {
@@ -36,20 +36,25 @@ function rndPts() {
   // generate random points
 
   const cntPts = 4
-  const bndX = dimension_slider.valueAsNumber * 100
-  const bndY = dimension_slider.valueAsNumber * 100
+  const cntPts2 = 4
+  const bndX = dimension_slider.valueAsNumber * 15
+  const bndY = dimension_slider.valueAsNumber * 15
+
+  const coordenadas = [{x:300,y:500},{x:900,y:1000},{x:1200,y:400},{x:1800,y:700}]
+  const coordenadas2 = [{x:700,y:200},{x:900,y:5000},{x:800,y:100},{x:800,y:100}]
 
   for (let i = 0; i < cntPts; i++) {
-    const x = Math.random() * (bndX - -bndX) + -bndX
-    const y = Math.random() * (bndY - -bndY) + -bndY
+    const x = coordenadas[i].x
+    const y = coordenadas[i].y
     const z = 0
+
 
     const pt = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
 
     console.log( `x ${x} y ${y}` )
 
     points.push(pt)
-
+    
     //viz in three
     const icoGeo = new THREE.IcosahedronGeometry(25)
     const icoMat = new THREE.MeshNormalMaterial()
@@ -66,7 +71,34 @@ function rndPts() {
     scene.add(tcontrols)
     
   }
+  for (let i = 0; i < cntPts2; i++) {
+    const x = coordenadas2[i].x
+    const y = coordenadas2[i].y
+    const z = 0
 
+
+    const pt2 = "{\"X\":" + x + ",\"Y\":" + y + ",\"Z\":" + z + "}"
+
+    console.log( `x ${x} y ${y}` )
+
+    points2.push(pt2)
+    
+    //viz in three
+    const icoGeo = new THREE.IcosahedronGeometry(25)
+    const icoMat = new THREE.MeshNormalMaterial()
+    const ico = new THREE.Mesh( icoGeo, icoMat )
+    ico.name = 'ico'
+    ico.position.set( x, y, z)
+    scene.add( ico )
+    
+    let tcontrols = new TransformControls( camera, renderer.domElement )
+    tcontrols.enabled = true
+    tcontrols.attach( ico )
+    tcontrols.showZ = false
+    tcontrols.addEventListener( 'dragging-changed', onChange )
+    scene.add(tcontrols)
+    
+  }
 }
 
 let dragging = false
@@ -75,6 +107,7 @@ function onChange() {
   if ( !dragging ) {
     // update points position
     points = []
+    points2 = []
     scene.traverse(child => {
       if ( child.name === 'ico' ) {
         const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
