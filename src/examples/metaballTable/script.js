@@ -15,9 +15,15 @@ const definition = 'metaballTable.gh'
 const dimension_slider = document.getElementById( 'dimension' )
 dimension_slider.addEventListener( 'mouseup', onSliderChange, false )
 dimension_slider.addEventListener( 'touchend', onSliderChange, false )
+
 const height_slider = document.getElementById( 'height' )
 height_slider.addEventListener( 'mouseup', onSliderChange, false )
 height_slider.addEventListener( 'touchend', onSliderChange, false )
+
+
+
+
+
 
 let points = []
 let points2 = []
@@ -112,6 +118,7 @@ function rndPts() {
 
 let dragging = false
 function onChange() {
+  
   dragging = ! dragging
   if ( !dragging ) {
     // update points position
@@ -131,7 +138,7 @@ function onChange() {
     }, false)
 
     compute()
-
+  
     controls.enabled = true
     return 
 }
@@ -156,6 +163,7 @@ async function compute () {
       'points': points, points2
     
     }
+    
   }
 
   console.log(data.inputs)
@@ -178,6 +186,7 @@ async function compute () {
   } catch(error){
     console.error(error)
   }
+  
 }
 
 /**
@@ -281,8 +290,14 @@ return null
  */
 function onSliderChange () {
   // show spinner
+  let x = dimension_slider.valueAsNumber
+  let y= height_slider.valueAsNumber
+  document.getElementById( 'dimension_label' ).innerHTML = 'Section Dimension:' + x
+  document.getElementById( 'height_label' ).innerHTML = 'Length of the seat: ' + y
   showSpinner(true)
   compute()
+
+ 
 }
 
 /**
@@ -319,7 +334,10 @@ function init () {
   controls = new OrbitControls( camera, renderer.domElement  )
 
   window.addEventListener( 'resize', onWindowResize, false )
-
+  let x = dimension_slider.valueAsNumber
+  let y= height_slider.valueAsNumber
+  document.getElementById( 'dimension_label' ).innerHTML = 'Section Dimension:' + x
+  document.getElementById( 'height_label' ).innerHTML = 'Length of the seat: ' + y
   animate()
 }
 
