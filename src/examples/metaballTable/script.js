@@ -37,8 +37,6 @@ function rndPts() {
 
   const cntPts = 7
   const cntPts2 = 7
-  const bndX = dimension_slider.valueAsNumber * 15
-  const bndY = dimension_slider.valueAsNumber * 15
 
   const coordenadas = [{x:-74.75,y:52.01},{x:154.49,y:132.97},{x:163.86,y:104.00},{x:122.10,y:-20.42},{x:164.71,y:-118.42},{x:127.22,y:-148.25},{x:-25.32,y:-98.82}]
   const coordenadas2 = [{x:-276,y:163},{x:-285,y:106},{x:-76,y:50},{x:-47,y:44},{x:-118,y:-204},{x:-20,y:-197},{x:-15,y:-64}]
@@ -68,7 +66,7 @@ function rndPts() {
     tcontrols.attach( ico )
     tcontrols.showX = true
     tcontrols.showY = true
-    tcontrols.showZ = true
+    tcontrols.showZ = false
     tcontrols.size = 0.1
     tcontrols.addEventListener( 'dragging-changed', onChange )
     scene.add(tcontrols)
@@ -99,7 +97,7 @@ function rndPts() {
     tcontrols.attach( ico )
     tcontrols.showX = true
     tcontrols.showY = true
-    tcontrols.showZ = true
+    tcontrols.showZ = false
     tcontrols.size = 0.1
     tcontrols.addEventListener( 'dragging-changed', onChange )
     scene.add(tcontrols)
