@@ -20,13 +20,24 @@ const height_slider = document.getElementById( 'height' )
 height_slider.addEventListener( 'mouseup', onSliderChange, false )
 height_slider.addEventListener( 'touchend', onSliderChange, false )
 
+const cadeira = document.getElementById( 'cadeira' )
+cadeira.addEventListener( 'change', onSelectChange, false )
 
+const coordenadas = [{x:-74.75,y:52.01},{x:154.49,y:132.97},{x:163.86,y:104.00},{x:122.10,y:-20.42},{x:164.71,y:-118.42},{x:127.22,y:-148.25},{x:-25.32,y:-98.82}]
+const coordenadas2 = [{x:-276,y:163},{x:-285,y:106},{x:-76,y:50},{x:-47,y:44},{x:-118,y:-204},{x:-20,y:-197},{x:-15,y:-64}]
+const coordenadas3 = [{x:-176,y:193},{x:-185,y:156},{x:-96,y:80},{x:-87,y:44},{x:-118,y:-904},{x:-27,y:-197},{x:-15,y:-94}]
+const coordenadas4 = [{x:-136,y:193},{x:-356,y:156},{x:-96,y:157},{x:-87,y:467},{x:-300,y:-904},{x:-27,y:-999},{x:-15,y:-15}]
 
+var points = []
+var points2 = []
+var option1 = [coordenadas, coordenadas2]
+var option2 = [coordenadas3, coordenadas4]
+var option_selector = option1
 
+var ico = null
+var ico2 = null
+var tcontrols = null
 
-
-let points = []
-let points2 = []
 let rhino, doc
 
 rhino3dm().then(async m => {
@@ -39,22 +50,30 @@ rhino3dm().then(async m => {
 })
 
 function rndPts() {
+  console.log(scene)
+  let obj
+  for( var i = scene.children.length - 1; i >= 0; i--) { 
+    obj = scene.children[i];
+    scene.remove(obj); 
+}
+  
+  scene.traverse(child => {
+    console.log("aqui")
+    if ( child.userData.hasOwnProperty( 'objectType' ) && child.userData.objectType === 'File3dm' ) {
+      scene.remove( child )
+    }})
   // generate random points
+  points = []
+  points2 = []
 
-  const cntPts = 7
-  const cntPts2 = 7
-  //   if slider=0 x=cord0, if slider=1 x=cord1, if slider=2 x=coord2, etc
+  console.log ("fgdfg")
+  console.log (option_selector)
+  const curva1 = option_selector[0]
+  const curva2 = option_selector[1]
 
-  //   for (let i=0, i)i < cntPts; i++) {
-  //  const x = X[i].x
-    //const y = X[i].y
- //   const z = 0
-  const coordenadas = [{x:-74.75,y:52.01},{x:154.49,y:132.97},{x:163.86,y:104.00},{x:122.10,y:-20.42},{x:164.71,y:-118.42},{x:127.22,y:-148.25},{x:-25.32,y:-98.82}]
-  const coordenadas2 = [{x:-276,y:163},{x:-285,y:106},{x:-76,y:50},{x:-47,y:44},{x:-118,y:-204},{x:-20,y:-197},{x:-15,y:-64}]
-
-  for (let i = 0; i < cntPts; i++) {
-    const x = coordenadas[i].x
-    const y = coordenadas[i].y
+  for (let i = 0; i < curva1.length; i++) {
+    const x = curva1[i].x
+    const y = curva1[i].y
     const z = 0
 
 
@@ -83,9 +102,9 @@ function rndPts() {
     scene.add(tcontrols)
     
   }
-  for (let i = 0; i < cntPts2; i++) {
-    const x = coordenadas2[i].x
-    const y = coordenadas2[i].y
+  for (let i = 0; i < curva2.length; i++) {
+    const x = curva2[i].x
+    const y = curva2[i].y
     const z = 0
 
 
@@ -96,16 +115,17 @@ function rndPts() {
     points2.push(pt2)
     
     //viz in three
+  
     const icoGeo = new THREE.IcosahedronGeometry(5)
     const icoMat = new THREE.MeshNormalMaterial()
-    const ico = new THREE.Mesh( icoGeo, icoMat )
-    ico.name = 'ico2'
-    ico.position.set( x, y, z)
-    scene.add( ico )
+    ico2 = new THREE.Mesh( icoGeo, icoMat )
+    ico2.name = 'ico2'
+    ico2.position.set( x, y, z)
+    scene.add( ico2 )
     
     let tcontrols = new TransformControls( camera, renderer.domElement )
     tcontrols.enabled = true
-    tcontrols.attach( ico )
+    tcontrols.attach( ico2 )
     tcontrols.showX = true
     tcontrols.showY = true
     tcontrols.showZ = false
@@ -294,11 +314,32 @@ function onSliderChange () {
   let y= height_slider.valueAsNumber
   document.getElementById( 'dimension_label' ).innerHTML = 'Section Dimension:' + x
   document.getElementById( 'height_label' ).innerHTML = 'Length of the seat: ' + y
+
+
   showSpinner(true)
   compute()
 
  
 }
+
+function onSelectChange (){
+  
+  const batata = document.getElementById ("cadeira")
+  const opcao = batata.value
+  switch (opcao) {
+    case "option1":
+      option_selector = option1
+      break;
+    case "option2" :
+      option_selector = option2
+      break
+  }
+  console.log(opcao)
+  showSpinner(true)
+  rndPts()
+  compute()
+}
+  // show spinner
 
 /**
  * Shows or hides the loading spinner
